@@ -23,27 +23,31 @@ def lex_analyze(input_string):
     # Initialize an empty list to store tokens
     tokens = []
     
+    # Initialize an empty list to store error messages
+    lexical_errors = []
+    
     # Iterate through the input string
-    while input_string: # if a == 0:
-        match = None
-        
+    while input_string:  # if a == 0:
+        match_found = False  # Flag to show whether an valid token has been detected or not
+
         # Try to match each token pattern
         for token_type, pattern in token_patterns.items():
-            regex = re.compile(pattern) # Compile the regular expression
+            regex = re.compile(pattern)  # Compile the regular expression
             match = regex.match(input_string)
             if match:
                 token_value = match.group(0)
-                tokens.append((token_type, token_value)) # Append a tuple of the (token, lexeme) to the list of identfied tokens
-                
-                '''
-                After identifying a valid token, move the index of the 'cursor' to the character
-                immediately after the last character of the previously identified token.
-                '''
-                input_string = input_string[match.end():]
+                tokens.append((token_type, token_value))  # Append a tuple of the (token, lexeme) to the list of identified tokens
+                input_string = input_string[match.end():]  # Move the index of the 'cursor' to the character immediately after the last character of the previously identified token
+                match_found = True
                 break
-        
-        # If no match is found, raise an error
-        if not match:
-            raise Exception(f"Invalid token at position {len(input_string)}: {input_string[:10]}...")
-    
-    return tokens
+
+        # If no match is found, add an error message to the list of lexical errors
+        if not match_found:
+            # Find the end of the lexeme until the next whitespace or newline
+            end_index = min(input_string.find(' '), input_string.find('\n')) if ' ' in input_string or '\n' in input_string else len(input_string)
+            lexeme = input_string[:end_index] if end_index != -1 else input_string
+            lexical_errors.append(("Invalid token", f"{lexeme}"))
+            input_string = input_string[end_index:] if end_index != -1 else ''
+
+    # Return tokens if no lexical errors occurred, otherwise return error messages
+    return lexical_errors if lexical_errors else tokens
