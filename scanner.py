@@ -14,7 +14,8 @@ def lex_analyze(input_string):
         'IDENTIFIER': r'[a-zA-Z_][a-zA-Z0-9_]*',
         'COLON': r':',
         'ASSIGNMENT_OPERATOR': r'=',
-        'PARENTHESIS': r'\(|\)', # Matches '(' or ')'
+        'OPENING_PARENTHESIS': r'\(',
+        'CLOSING_PARENTHESIS': r'\)',
         'STRING_LITERAL': r'".*"', # Matches any character, except newline, zero or more times
         'FLOAT': r'\b\d+\.\d+\b',  # Matches floats
         'INTEGER': r'\b\d+\b',  # Matches integers
