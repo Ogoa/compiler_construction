@@ -16,7 +16,8 @@ def lex_analyze(input_string):
         'ASSIGNMENT_OPERATOR': r'=',
         'PARENTHESIS': r'\(|\)', # Matches '(' or ')'
         'STRING_LITERAL': r'".*"', # Matches any character, except newline, zero or more times
-        'NUMBER': r'\d+(\.\d+)?'
+        'FLOAT': r'\b\d+\.\d+\b',  # Matches floats
+        'INTEGER': r'\b\d+\b',  # Matches integers
     }
     
     # Initialize an empty list to store tokens
