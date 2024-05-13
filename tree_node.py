@@ -6,7 +6,7 @@ class Node:
 
         Args:
             name (str): non-terminal as described in the refactored BNF
-            value (*, optional): Lexeme that is part of the program. Defaults to None.
+            value (*, optional): non-terminal that is derived from expanding its parent non-terminal. Defaults to None.
         """
         self.name = name
         self.value = value
@@ -19,3 +19,15 @@ class Node:
             child (Node): token obtained after expanding a non-terminal
         """
         self.children.append(child)
+        
+    def print_tree(self, depth=0):
+        """Prints the parse tree that has been constructed
+
+        Args:
+            depth (int): Depth of the current node in the tree (used for indentation)
+        """
+        indent = "  " * depth
+        print(f"{indent}{self.name}: {self.value}")
+
+        for child in self.children:
+            child.print_tree(depth + 1)
