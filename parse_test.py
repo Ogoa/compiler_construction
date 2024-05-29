@@ -1,4 +1,4 @@
-from mini_grammar_parser import Parser
+from our_parser import Parser
 
 def parse_input_string(input_string):
     """Main parsing function that orchestrates the parsing process"""
@@ -15,7 +15,7 @@ def parse_input_string(input_string):
         # Print the parse tree if it exists
         if parse_tree:
             print("\nParse Tree:\n")
-            parse_tree.print_tree()
+            parse_tree.print_parse_tree()
         else:
             print("Parse tree is non-existent")
 
@@ -26,6 +26,7 @@ if x > 100:
     print("x is greater than 100")
 else:
     print("x is not greater than 100")
+    
 """
 
 parse_input_string(input_string)

@@ -1,7 +1,7 @@
-from scanner import lex_analyze as analyser
+from scanner import lex_analyze
 
-input_string = """
-s1 = 34.9098 - 4598; float while = '23' * " ; if _9 != 230 print ('not')
+input_string_1 = """
+s1 = 34.9098 : - 4598; float while = '23' * " ; if _9 != 230 print ('not')
 """
 
 input_string_2 = """
@@ -11,6 +11,6 @@ else:
     print("Not Two")
 """
 
-tokens = analyser(input_string_2)
+tokens = lex_analyze(input_string_1)
 for i in tokens:
     print(i[0], ": ", i[1])

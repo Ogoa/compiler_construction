@@ -23,13 +23,13 @@ def lex_analyze(input_string):
     
     # Initialize an empty list to store tokens
     tokens = []
-    
+
     # Initialize an empty list to store error messages
     lexical_errors = []
     
     # Iterate through the input string
     while input_string:  # if a == 0:
-        match_found = False  # Flag to show whether an valid token has been detected or not
+        match_found = False  # Flag to show whether a valid token has been detected or not
 
         # Try to match each token pattern
         for token_type, pattern in token_patterns.items():
