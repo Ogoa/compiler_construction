@@ -1,4 +1,4 @@
-from scanner import lex_analyze
+from our_parser1 import Parser
 class Node:
     def __init__(self, name, value=None):
         self.name = name
@@ -60,3 +60,16 @@ class Node:
             ir_code = ["loop_label:"] + condition_ir + [f"JUMP_IF_FALSE end_loop_label"] + block_ir + [f"JUMP loop_label", "end_loop_label:"]
             return ir_code
         return []
+
+input_string = """x = 10"""
+parser = Parser(input_string)
+parse_tree = parser.parse()
+
+if isinstance(parse_tree, Node):
+    ir_code = parse_tree.generate_ir()
+    for instruction in ir_code:
+        print(instruction)
+else:
+    print("Errors encountered during parsing:")
+    for error in parse_tree:
+        print(error)
